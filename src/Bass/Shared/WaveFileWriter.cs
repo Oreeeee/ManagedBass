@@ -164,7 +164,7 @@ namespace ManagedBass
             {
                 lock (_locker)
                 {
-                    _writer.Dispose();
+                    _writer.Close();
                     _writer = null;
                 }
 
