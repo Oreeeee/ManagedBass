@@ -9,5 +9,10 @@ namespace ManagedBass
         {
             return (T)Marshal.PtrToStructure(ptr, typeof(T));
         }
+
+        public static int SizeOf<T>()
+        {
+            return Marshal.SizeOf(typeof(T));
+        }
     }
 }
