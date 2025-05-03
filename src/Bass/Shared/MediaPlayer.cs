@@ -342,7 +342,7 @@ namespace ManagedBass
 
             var tags = TagReader.Read(Handle);
 
-            Title = !string.IsNullOrWhiteSpace(tags.Title) ? tags.Title 
+            Title = !tags.Title.IsNullOrWhiteSpace() ? tags.Title 
                                                            : Path.GetFileNameWithoutExtension(FileName);
             Artist = tags.Artist;
             Album = tags.Album;

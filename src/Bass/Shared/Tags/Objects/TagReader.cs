@@ -54,7 +54,7 @@ namespace ManagedBass
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(result?.Title))
+            if (!(result?.Title).IsNullOrWhiteSpace())
                 result.Title = System.IO.Path.GetFileNameWithoutExtension(FileName);
 
             return result;
@@ -131,7 +131,7 @@ namespace ManagedBass
                     break;
             }
 
-            if (string.IsNullOrWhiteSpace(result.Lyrics))
+            if (result.Lyrics.IsNullOrWhiteSpace())
             {
                 var ptr = Bass.ChannelGetTags(Channel, TagType.Lyrics3v2);
 
@@ -258,7 +258,7 @@ namespace ManagedBass
             foreach (var otherTag in ReadUsingLookupTable(Extensions.ExtractMultiStringUtf8(ptr), LookupTables.Ogg, '='))
                 Other.Add(otherTag.Key, otherTag.Value);
 
-            if (string.IsNullOrWhiteSpace(Encoder))
+            if (Encoder.IsNullOrWhiteSpace())
             {
                 var encoderPtr = Bass.ChannelGetTags(Channel, TagType.OggEncoder);
                 if (encoderPtr != IntPtr.Zero)
