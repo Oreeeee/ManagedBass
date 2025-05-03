@@ -32,7 +32,7 @@ namespace ManagedBass
                 var sizeOfPluginFormat = Marshal.SizeOf<PluginFormat>();
                 
                 for (var i = 0; i < formatc; ++i, formats = IntPtrBackport.Add(formats, sizeOfPluginFormat))
-                    arr[i] = Marshal.PtrToStructure<PluginFormat>(formats);
+                    arr[i] = MarshalBackport.PtrToStructure<PluginFormat>(formats);
                 
                 return arr;
             }

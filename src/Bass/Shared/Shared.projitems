@@ -95,6 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IEffectParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntPtrBackport.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MarshalBackport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MediaPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ChannelReferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resolution.cs" />

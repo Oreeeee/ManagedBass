@@ -166,7 +166,7 @@ namespace ManagedBass
         /// </summary>
         public static CartTag Read(int Channel)
         {
-            return Marshal.PtrToStructure<CartTag>(Bass.ChannelGetTags(Channel, TagType.RiffCart));
+            return MarshalBackport.PtrToStructure<CartTag>(Bass.ChannelGetTags(Channel, TagType.RiffCart));
         }
     }
 }
