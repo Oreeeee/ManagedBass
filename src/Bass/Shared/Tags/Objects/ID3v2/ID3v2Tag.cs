@@ -35,8 +35,8 @@ namespace ManagedBass
             if (ReadText(3, TextEncodings.Ascii) != "ID3") // If don't contain ID3v2 tag
                 throw new DataMisalignedException("ID3v2 info not found");
 
-            _versionInfo = new Version(2, ReadByte(), ReadByte()); // Read ID3v2 version           
-            _ptr += 1; // Flags are skipped
+            _versionInfo = new Version(2, ReadByte(), ReadByte()); // Read ID3v2 version        
+            _ptr = IntPtrBackport.Add(_ptr, 1); // Flags are skipped
 
             ReadAllFrames(ReadSize());
         }
@@ -65,7 +65,7 @@ namespace ManagedBass
                 }
 
                 // if readed byte is not zero. it must read as FrameID
-                _ptr -= 1;
+                _ptr = IntPtrBackport.Subtract(_ptr, 1);
 
                 // ---------- Read Frame Header -----------------------
                 var frameId = ReadText(frameIdLen, TextEncodings.Ascii);
@@ -83,7 +83,7 @@ namespace ManagedBass
 
                 // if don't read this frame, we must go forward to read next frame
                 if (!added)
-                    _ptr += frameLength;
+                    _ptr = IntPtrBackport.Add(_ptr, frameLength);
 
                 Length -= frameLength + 10;
             }
@@ -126,7 +126,7 @@ namespace ManagedBass
                     if (--Length > 8)
                         return false;
             
-                    _ptr += Length; // Skip Counter value
+                    _ptr = IntPtrBackport.Add(_ptr, Length); // Skip Counter value
                         
                     AddTextFrame("POPM", rating);                        
                     return true;
@@ -140,7 +140,7 @@ namespace ManagedBass
                     if (!Enum.IsDefined(typeof(TextEncodings), TextEncoding))
                         return false;
 
-                    _ptr += 3;
+                    _ptr = IntPtrBackport.Add(_ptr, 3);
                         
                     Length -= 3;
 
@@ -233,7 +233,7 @@ namespace ManagedBass
                     {
                         // FF FE
                         TEncoding = TextEncodings.Utf16; // UTF-16 (LE)
-                        _ptr -= 1;
+                        _ptr = IntPtrBackport.Subtract(_ptr, 1);
                         bytesRead += 1;
                         MaxLength -= 2;
                     }
@@ -242,7 +242,7 @@ namespace ManagedBass
                     {
                         // FE FF
                         TEncoding = TextEncodings.Utf16Be;
-                        _ptr -= 1;
+                        _ptr = IntPtrBackport.Subtract(_ptr, 1);
                         bytesRead += 1;
                         MaxLength -= 2;
                     }
@@ -253,8 +253,9 @@ namespace ManagedBass
                         TEncoding = TextEncodings.Utf8;
                         MaxLength -= 3;
                     }
+
                     {
-                        _ptr -= 3;
+                        _ptr = IntPtrBackport.Subtract(_ptr, 3);
                         bytesRead += 3;
                     }
                 }
@@ -288,7 +289,7 @@ namespace ManagedBass
                 }
 
                 if (MaxLength < 0)
-                    _ptr += MaxLength;
+                    _ptr = IntPtrBackport.Add(_ptr, MaxLength);
 
                 ReadedLength -= bytesRead;
 
@@ -347,7 +348,7 @@ namespace ManagedBass
         void Read(byte[] Buffer, int Offset, int Count)
         {
             Marshal.Copy(_ptr, Buffer, Offset, Count);
-            _ptr += Count;
+            _ptr = IntPtrBackport.Add(_ptr, Count);
         }
         #endregion
     }

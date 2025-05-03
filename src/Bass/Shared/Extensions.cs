@@ -125,7 +125,7 @@ namespace ManagedBass
                 l.Add(str);
 
                 // char '\0'
-                Ptr += str.Length + 1;
+                Ptr = IntPtrBackport.Add(Ptr, str.Length + 1);
             }
 
             return l.ToArray();
@@ -147,7 +147,7 @@ namespace ManagedBass
  
                 l.Add(str);
 
-                Ptr += size + 1;
+                Ptr = IntPtrBackport.Add(Ptr, size + 1);
             }
 
             return l.ToArray();

@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Effects\Structures\DXCompressorParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Effects\Structures\DXGargleParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Effects\Structures\DX_ID3DL2ReverbParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EnumBackport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GCPin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BassException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bass\Delegates\DownloadProcedure.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Errors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IEffectParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IntPtrBackport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MediaPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ChannelReferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resolution.cs" />
