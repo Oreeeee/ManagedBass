@@ -318,42 +318,43 @@ namespace ManagedBass
         /// <returns><see langword="true"/> on succes, <see langword="false"/> on failure.</returns>
         public async Task<bool> LoadAsync(string FileName)
         {
-            try
-            {
-                if (Handle != 0)
-                    Bass.StreamFree(Handle);
-            }
-            catch { }
-
-            if (_dev != -1)
-                Bass.CurrentDevice = _dev;
-
-            var currentDev = Bass.CurrentDevice;
-
-            if (currentDev == -1 || !Bass.GetDeviceInfo(Bass.CurrentDevice).IsInitialized)
-                Bass.Init(currentDev);
-
-            var h = await Task.Run(() => OnLoad(FileName));
-
-            if (h == 0)
-                return false;
-
-            Handle = h;
-
-            var tags = TagReader.Read(Handle);
-
-            Title = !tags.Title.IsNullOrWhiteSpace() ? tags.Title 
-                                                           : Path.GetFileNameWithoutExtension(FileName);
-            Artist = tags.Artist;
-            Album = tags.Album;
-            
-            InitProperties();
-
-            MediaLoaded?.Invoke(h);
-
-            OnPropertyChanged("");
-
-            return true;
+            return false;
+            // try
+            // {
+            //     if (Handle != 0)
+            //         Bass.StreamFree(Handle);
+            // }
+            // catch { }
+            //
+            // if (_dev != -1)
+            //     Bass.CurrentDevice = _dev;
+            //
+            // var currentDev = Bass.CurrentDevice;
+            //
+            // if (currentDev == -1 || !Bass.GetDeviceInfo(Bass.CurrentDevice).IsInitialized)
+            //     Bass.Init(currentDev);
+            //
+            // var h = await Task.Run(() => OnLoad(FileName));
+            //
+            // if (h == 0)
+            //     return false;
+            //
+            // Handle = h;
+            //
+            // var tags = TagReader.Read(Handle);
+            //
+            // Title = !tags.Title.IsNullOrWhiteSpace() ? tags.Title 
+            //                                                : Path.GetFileNameWithoutExtension(FileName);
+            // Artist = tags.Artist;
+            // Album = tags.Album;
+            //
+            // InitProperties();
+            //
+            // MediaLoaded?.Invoke(h);
+            //
+            // OnPropertyChanged("");
+            //
+            // return true;
         }
 
         /// <summary>
